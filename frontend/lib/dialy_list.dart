@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:dialy/models/dialy.dart';
 import 'package:dialy/dialy_item.dart';
@@ -10,9 +9,17 @@ class DialyList extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return ListView.builder(
+    return Scaffold(
+      appBar: AppBar(actions: [
+        IconButton(icon: const Icon(Icons.search), onPressed: () {})
+      ]),
+      body: ListView.builder(
         itemCount: dialies.length,
         itemBuilder: (ctx, index) => Dismissible(
-            key: ValueKey(dialies[index]), child: DialyItem(dialies[index])));
+          key: ValueKey(dialies[index]),
+          child: DialyItem(dialies[index]),
+        ),
+      ),
+    );
   }
 }
