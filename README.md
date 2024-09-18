@@ -17,6 +17,7 @@ git clone git@github.com:mizutama1225/dialy.git --recursive
 ```bash
 docker compose up --build
 ```
+<br>
 
 <details>
 <summary>ビルドまたは起動のみを行う</summary>
