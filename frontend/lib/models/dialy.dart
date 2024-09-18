@@ -1,6 +1,3 @@
-
-import 'package:flutter/material.dart';
-
 class Dialy {
   Dialy({
     required this.userName,
