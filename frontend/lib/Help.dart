@@ -12,12 +12,18 @@ class HelpPage extends StatelessWidget {
             .inversePrimary,
         title: const Text('ヘルプ'),
       ),
-      body: const Column(
-        children: [
-          Text('ヘルプ'),
-
-        ],
+      body: const Center(
+        child: Column(
+          children:[
+            SizedBox(
+              height:30,
+            ),
+            Text('問題を報告'),
+          ]
+        ),
       ),
-    );
+
+
+      );
   }
 }

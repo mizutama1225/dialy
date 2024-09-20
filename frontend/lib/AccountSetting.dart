@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'setting.dart';
 import 'UserNameSetting.dart';
+import 'IconImageSetting.dart';
 
 
 class AccountSettingPage extends StatelessWidget {
@@ -45,6 +46,30 @@ class AccountSettingPage extends StatelessWidget {
                     },
                     child: const Text("Input_Introduction"),
                   ),]
+            ),
+            Row(
+                children:[
+                  const Text('　　プロフィール写真　　'),
+                  GestureDetector(
+                    onTap:(){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => IconImageSettingPage(title: '',)),
+                      );
+                    },
+                    child:Container(
+                      width:100,
+                      height:100,
+                      decoration: const BoxDecoration(
+                        shape:BoxShape.circle,
+                        image:DecorationImage(
+                          fit:BoxFit.fill,
+                          image:AssetImage('image/SNS_Icon.jpg')
+                        )
+                      ),
+                    ),
+                  )
+                ]
             ),
 
 
