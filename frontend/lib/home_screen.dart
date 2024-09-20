@@ -1,4 +1,3 @@
-
 import 'package:dialy/models/dialy.dart';
 import 'package:flutter/material.dart';
 import 'package:dialy/dialy_list.dart';
