@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 
-class HomePage extends StatelessWidget {
+class HelpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,11 +10,11 @@ class HomePage extends StatelessWidget {
             .of(context)
             .colorScheme
             .inversePrimary,
-        title: const Text('OPEN'),
+        title: const Text('ヘルプ'),
       ),
       body: const Column(
         children: [
-          Text('アカウント名'),
+          Text('ヘルプ'),
 
         ],
       ),
