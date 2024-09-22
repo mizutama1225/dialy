@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget{
     requestModel = new LoginRequestModel();
   }
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -27,9 +28,7 @@ class MyApp extends StatelessWidget{
           children: [
             const Text('メールアドレス'),
             const TextField(
-              onCanged: (value){
-                email = value;
-              },
+              onCanged: (input) => requestModel.emailAddress = input,
                 decoration:InputDecoration(
                     border:OutlineInputBorder(),
                     prefixIcon: Icon(Icons.mail),
@@ -38,19 +37,17 @@ class MyApp extends StatelessWidget{
             ),
             const Text('パスワード'),
             const TextField(
-              onCanged: (value){
-                passward = value;
-              },
+              onCanged: (input) => requestModel.password = input,
                 decoration:InputDecoration(
                   border:OutlineInputBorder(),
                   prefixIcon: Icon(Icons.key),
                 )
             ),
             ElevatedButton(
-              onPressed: (
-                  box_email = email;
-                  box_passward = passward;
-              ){
+              onPressed:(){
+                if(validateAndSave()){
+                  print(requestModel.toJson());
+                }
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => HomePage()),
@@ -65,18 +62,13 @@ class MyApp extends StatelessWidget{
       ),
     );
   }
-}
 
-class LoginPost{
-  final String email = "";
-  final String passward = "";
-
-  LoginPost({
-    this.email,
-    this.passward,
-  });
-  Map<String, dynamic> toJson() =>{
-    'email': email;
-    'passward': passward;
-  };
+  bool validateAndSave() {
+    final form = globalFormKey.currenState;
+    if(form.validate()){
+      form.save();
+      return true;
+    }
+    return false;
+  }
 }
