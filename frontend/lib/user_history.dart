@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dialy/models/dialy.dart';
+import 'package:dialy/background.dart';
 
 class UserHistory extends StatefulWidget {
   const UserHistory({super.key, required this.user});
@@ -38,74 +39,81 @@ class _UserHistoryState extends State<UserHistory> {
       appBar: AppBar(
         title: const Text("戻る"),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child: Row(
+      body: Background(
+        childWidget: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.person,
+                        color: dialyIndex % 2 == 0 ? Colors.red : Colors.black,
+                      ),
+                      Text(
+                        widget.user.userName,
+                        style: TextStyle(
+                            color: dialyIndex % 2 == 0
+                                ? Colors.red
+                                : Colors.black),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.person,
+                        color: dialyIndex % 2 == 0 ? Colors.black : Colors.red,
+                      ),
+                      Text(
+                        "あなた",
+                        style: TextStyle(
+                            color: dialyIndex % 2 == 0
+                                ? Colors.black
+                                : Colors.red),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Container(
+                  decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 233, 125, 118)),
+                  width: 300,
+                  height: 450,
+                  child: Text(
+                    dialies[dialyIndex],
+                    style: const TextStyle(fontSize: 28),
+                  )),
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Column(
-                  children: [
-                    Icon(
-                      Icons.person,
-                      color: dialyIndex % 2 == 0 ? Colors.red : Colors.black,
-                    ),
-                    Text(
-                      widget.user.userName,
-                      style: TextStyle(
-                          color:
-                              dialyIndex % 2 == 0 ? Colors.red : Colors.black),
-                    )
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(
-                      Icons.person,
-                      color: dialyIndex % 2 == 0 ? Colors.black : Colors.red,
-                    ),
-                    Text(
-                      "あなた",
-                      style: TextStyle(
-                          color:
-                              dialyIndex % 2 == 0 ? Colors.black : Colors.red),
-                    ),
-                  ],
-                ),
+                IconButton(
+                    onPressed: _decrementIndex,
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: dialyIndex > 0 ? Colors.black87 : Colors.black38,
+                    )),
+                Text("${dialyIndex + 1}/${dialies.length}"),
+                IconButton(
+                    onPressed: _incrementIndex,
+                    icon: Icon(
+                      Icons.arrow_forward,
+                      color: dialyIndex < dialies.length - 1
+                          ? Colors.black87
+                          : Colors.black38,
+                    )),
               ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30),
-            child: Container(
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 235, 160, 154)),
-                width: 250,
-                height: 400,
-                child: Text(dialies[dialyIndex])),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                  onPressed: _decrementIndex,
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: dialyIndex > 0 ? Colors.black87 : Colors.black38,
-                  )),
-              Text("${dialyIndex + 1}/${dialies.length}"),
-              IconButton(
-                  onPressed: _incrementIndex,
-                  icon: Icon(
-                    Icons.arrow_forward,
-                    color: dialyIndex < dialies.length - 1
-                        ? Colors.black87
-                        : Colors.black38,
-                  )),
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
