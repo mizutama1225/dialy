@@ -6,6 +6,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: 'trust'
     volumes:
       - ./data:/var/lib/postgresql/data
+
   backend:
     build: ./backend
     command: python3 manage.py runserver 0.0.0.0:8000
@@ -15,6 +16,24 @@ services:
       - "8000:8000"
     depends_on:
       - db
+
+  celery:
+    build: ./backend
+    command: celery -A dialyproject worker -l info
+    volumes:
+        - ./backend:/code
+    tty: true
+    depends_on:
+      - backend
+      - redis
+
+  redis:
+    image: redis:5
+    ports:
+      - "6379:6379"
+    restart: always
+
+
   frontend:
     build: ./frontend
     restart: always
