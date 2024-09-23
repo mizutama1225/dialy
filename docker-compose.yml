@@ -18,27 +18,14 @@ services:
       - db
 
   celery:
-    image: eeacms/celery:5.2-1.0
-    environment:
-      CELERY_BROKER_URL: "redis://redis:6379/0"  # Redisをブローカーに指定
-      CELERY_BACKEND_URL: "db+postgresql://postgres@db/postgres"  # PostgreSQLをバックエンドに指定
-      REQUIREMENTS: |
-          nltk
-          requests
-          sqlalchemy
-          psycopg2-binary
-          redis
-      CONSTRAINTS: |
-        nltk==3.4
-        requests==2.21.0
-        sqlalchemy>=1.3.0
-        psycopg2-binary>=2.8.0
-        redis>=4.0.0
-    depends_on:
-      - redis
-      - db  # 結果バックエンドに依存
+    build: ./backend
+    command: celery -A dialyproject worker -l info
     volumes:
-      - ./backend:/code
+        - ./backend:/code
+    tty: true
+    depends_on:
+      - backend
+      - redis
 
   redis:
     image: redis:5
