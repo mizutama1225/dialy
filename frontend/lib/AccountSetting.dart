@@ -10,7 +10,7 @@ class AccountSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: const Color(0xFF5de0e6),
         title: const Text('アカウント設定'),
         automaticallyImplyLeading: false,
       ),
@@ -54,7 +54,7 @@ class AccountSettingPage extends StatelessWidget {
                     onTap:(){
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => IconImageSettingPage(title: '',)),
+                        MaterialPageRoute(builder: (context) => IconImageSettingPage()),
                       );
                     },
                     child:Container(

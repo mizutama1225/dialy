@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SettingPage(),
+      home: FirstPage(),
     );
   }
 }
@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          backgroundColor: const Color(0xFF5de0e6),
     title: const Text('ホーム'),
     ),
     body: Center(

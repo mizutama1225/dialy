@@ -1,6 +1,8 @@
+import 'package:dialy/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'login.dart';
+import 'home_screen.dart';
 
 
 class SignUpCompletePage extends StatelessWidget {
@@ -8,7 +10,7 @@ class SignUpCompletePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          backgroundColor: const Color(0xFF5de0e6),
         title: const Text('メールアドレス認証'),
     ),
       body: Center(
@@ -26,7 +28,7 @@ class SignUpCompletePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
                   );
                 },
                 child: const Text(

@@ -8,10 +8,7 @@ class UserNameSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .inversePrimary,
+        backgroundColor: const Color(0xFF5de0e6),
         title: const Text('ユーザー名変更'),
       ),
       body: Column(

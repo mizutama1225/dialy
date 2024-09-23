@@ -1,3 +1,4 @@
+import 'package:dialy/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 
@@ -7,7 +8,7 @@ class MailSetting2Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: const Color(0xFF5de0e6),
         title: const Text('メールアドレス変更'),
       ),
       body: Center(
@@ -28,7 +29,7 @@ class MailSetting2Page extends StatelessWidget {
                     ElevatedButton(onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MailSetting2Page()),
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
                     },
                       child: const Text('認証する'),)

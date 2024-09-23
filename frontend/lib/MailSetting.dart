@@ -7,7 +7,7 @@ class MailSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: const Color(0xFF5de0e6),
         title: const Text('メールアドレス変更'),
       ),
       body: Center(

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'home_screen.dart';
 
 class LogInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: const Color(0xFF5de0e6),
         title: const Text('ログイン'),
       ),
       body: Center(
@@ -33,7 +34,7 @@ class LogInPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
                 );
               },
               child: const Text(

@@ -6,15 +6,15 @@ import 'package:image_picker/image_picker.dart';
 
 
 class IconImageSettingPage extends StatefulWidget {
-  final String title;
 
   const IconImageSettingPage({
     Key? key,
-    required this.title
   }) : super (key: key);
 
   @override
-  _IconImageSettingPageState createState() => _IconImageSettingPageState();
+  _IconImageSettingPageState createState() {
+    return _IconImageSettingPageState();
+  }
 }
 
 class _IconImageSettingPageState extends State<IconImageSettingPage>{
@@ -34,10 +34,7 @@ class _IconImageSettingPageState extends State<IconImageSettingPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .inversePrimary,
+        backgroundColor: const Color(0xFF5de0e6),
         title: const Text('プロフィール画像変更'),
       ),
       body: Center(
