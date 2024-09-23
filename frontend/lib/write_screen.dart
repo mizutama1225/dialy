@@ -1,7 +1,7 @@
-import 'dart:math';
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:dialy/main.dart';
+import 'package:http/http.dart' as http;
 
 class WriteScreen extends StatefulWidget {
   const WriteScreen({super.key});
@@ -16,9 +16,39 @@ class _WriteScreenState extends State<WriteScreen> {
   bool enableButton = false;
 
   final _snackBar = const SnackBar(content: Text("日記を送信しました"));
-  void sendDialy() {
+
+  // HTTPリクエストを送信する関数
+  void sendDialy() async {
     _text = _textController.text;
-    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+
+    // 送信先のURL
+    final String url = 'http://localhost:8000/writtenletter/';
+
+    // リクエストボディ
+    final Map<String, String> body = {
+      'user' : USERID ?? '',
+      'content': _text,
+      };
+
+    try {
+      // POSTリクエストの送信
+      final http.Response response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(body),
+      );
+
+      if (response.statusCode == 200) {
+        // リクエストが成功した場合
+        ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+      } else {
+        // リクエストが失敗した場合の処理
+        print('送信に失敗しました: ${response.statusCode}');
+      }
+    } catch (e) {
+      // エラーが発生した場合の処理
+      print('エラーが発生しました: $e');
+    }
   }
 
   @override
@@ -37,7 +67,6 @@ class _WriteScreenState extends State<WriteScreen> {
               const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 15),
           child: TextField(
             decoration: const InputDecoration(
-                // border: OutlineInputBorder(),
                 counterStyle: TextStyle(),
                 border: InputBorder.none,
                 fillColor: Color.fromARGB(255, 233, 212, 118),
@@ -46,7 +75,6 @@ class _WriteScreenState extends State<WriteScreen> {
               fontSize: 28,
             ),
             controller: _textController,
-            // inputFormatters: [LengthLimitingTextInputFormatter(100)],
             maxLength: 100,
             maxLines: 10,
             onChanged: (value) {
@@ -67,7 +95,6 @@ class _WriteScreenState extends State<WriteScreen> {
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(0),
-              // side: const BorderSide(color: Colors.white),
             ),
           ),
           onPressed: enableButton ? sendDialy : null,

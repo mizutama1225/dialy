@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:dialy/home_screen.dart';
+// import 'package:dialy/home_screen.dart';
+import 'package:dialy/login.dart';
+import 'package:dialy/signup.dart';
 
 // void main() {
 //   runApp(
@@ -21,6 +23,9 @@ import 'package:dialy/home_screen.dart';
 //     ),
 //   );
 // }
+
+String? USERID;
+
 void main() {
   runApp(const MaterialApp(home: MainApp()));
 }
@@ -46,9 +51,9 @@ class _MainAppState extends State<MainApp> {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: const Scaffold(
+      child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(child: HomeScreen()),
+        body: Center(child: SignUpPage()),
       ),
     );
   }
