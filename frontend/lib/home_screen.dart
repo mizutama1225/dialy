@@ -1,4 +1,3 @@
-import 'package:dialy/AccountSetting.dart';
 import 'package:dialy/models/dialy.dart';
 import 'package:flutter/material.dart';
 import 'package:dialy/main.dart';
@@ -7,11 +6,10 @@ import 'package:dialy/write_screen.dart';
 import 'package:dialy/open_screen.dart';
 import 'package:dialy/setting.dart';
 import 'package:dialy/background.dart';
+import 'package:dialy/AccountSetting.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,7 +31,8 @@ class _HomeScreen extends State<HomeScreen> {
   }
 
   Future<List<Dialy>> fetchDialies() async {
-    final response = await http.get(Uri.parse('http://localhost:8000/users/${USERID}/letters/'));
+    final response = await http
+        .get(Uri.parse('http://localhost:8000/users/${USERID}/letters/'));
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
@@ -116,6 +115,6 @@ class _HomeScreen extends State<HomeScreen> {
     const WriteScreen(),
     const OpenScreen(),
     const SizedBox(), // FutureBuilder内で処理するのでここは空のウィジェットに
-     SettingPage(),
+    SettingPage(),
   ];
 }

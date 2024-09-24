@@ -3,27 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:dialy/login.dart';
 import 'package:dialy/signup.dart';
 
-// void main() {
-//   runApp(
-//     MaterialApp(
-//       home: Scaffold(
-//         body: Container(
-//             decoration: const BoxDecoration(
-//               gradient: LinearGradient(
-//                 colors: [
-//                   Color.fromRGBO(93, 224, 230, 1),
-//                   Color.fromRGBO(0, 74, 173, 1)
-//                 ],
-//                 begin: Alignment.topLeft,
-//                 end: Alignment.bottomRight,
-//               ),
-//             ),
-//             child: Center(child: const HomeScreen())),
-//       ),
-//     ),
-//   );
-// }
-
 String? USERID;
 
 void main() {

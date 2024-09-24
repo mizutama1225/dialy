@@ -26,9 +26,9 @@ class _WriteScreenState extends State<WriteScreen> {
 
     // リクエストボディ
     final Map<String, String> body = {
-      'user' : USERID ?? '',
+      'user': USERID ?? '',
       'content': _text,
-      };
+    };
 
     try {
       // POSTリクエストの送信
