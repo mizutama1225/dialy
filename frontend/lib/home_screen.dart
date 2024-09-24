@@ -1,49 +1,53 @@
 import 'package:dialy/AccountSetting.dart';
 import 'package:dialy/models/dialy.dart';
 import 'package:flutter/material.dart';
+import 'package:dialy/main.dart';
 import 'package:dialy/dialy_list.dart';
 import 'package:dialy/write_screen.dart';
 import 'package:dialy/open_screen.dart';
 import 'package:dialy/setting.dart';
 import 'package:dialy/background.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreen createState() {
-    return _HomeScreen();
-  }
+  _HomeScreen createState() => _HomeScreen();
 }
 
 class _HomeScreen extends State<HomeScreen> {
   int _selectedIndex = 3;
   bool newDialyArrived = true;
+  Future<List<Dialy>>? _futureDialies;
 
-  static final List<Widget> _widgetOptions = <Widget>[
-    AccountSettingPage(),
-    const WriteScreen(),
-    const OpenScreen(),
-    DialyList(dialies: [
-      Dialy(
-        userName: "ユーザー1",
-        dialyText: "aaa",
-        updatedDate: DateTime(10, 9, 21),
-      ),
-      Dialy(
-        userName: "ユーザー2",
-        dialyText: "bbb",
-        updatedDate: DateTime(10, 9, 20),
-      ),
-      Dialy(
-        userName: "ユーザー3",
-        dialyText: "ccc",
-        updatedDate: DateTime(10, 9, 19),
-      ),
-    ]),
-    SettingPage(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    // 初期化時にデータを取得
+    _futureDialies = fetchDialies();
+  }
+
+  Future<List<Dialy>> fetchDialies() async {
+    final response = await http.get(Uri.parse('http://localhost:8000/users/${USERID}/letters/'));
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = jsonDecode(response.body);
+      List<Dialy> dialies = [];
+
+      data.forEach((key, value) {
+        dialies.add(Dialy.fromJson(value));
+      });
+
+      return dialies;
+    } else {
+      throw Exception('Failed to load dialies');
+    }
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -53,11 +57,25 @@ class _HomeScreen extends State<HomeScreen> {
 
   @override
   Widget build(context) {
-    return (MaterialApp(
+    return MaterialApp(
       home: Scaffold(
-        body: Background(
-          childWidget: _widgetOptions.elementAt(_selectedIndex),
-        ),
+        body: _selectedIndex == 3
+            ? FutureBuilder<List<Dialy>>(
+                future: _futureDialies,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (snapshot.hasData) {
+                    // バックエンドから取得したデータをDialyListに渡す
+                    return DialyList(dialies: snapshot.data!);
+                  } else {
+                    return const Center(child: Text('No data found.'));
+                  }
+                },
+              )
+            : _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           items: [
@@ -70,18 +88,12 @@ class _HomeScreen extends State<HomeScreen> {
                   ? const badges.Badge(
                       badgeContent: Text(
                         '!',
-                        style: TextStyle(
-                          // fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(color: Colors.white),
                       ),
                       badgeStyle: badges.BadgeStyle(
                         badgeColor: Color.fromRGBO(93, 224, 230, 1),
                       ),
-                      child: Icon(
-                        Icons.email,
-                        size: 35,
-                      ),
+                      child: Icon(Icons.email),
                     )
                   : const Icon(Icons.email),
               label: "閲覧",
@@ -95,6 +107,15 @@ class _HomeScreen extends State<HomeScreen> {
           selectedItemColor: const Color.fromRGBO(0, 74, 173, 1),
         ),
       ),
-    ));
+    );
   }
+
+  // 静的ではなくインスタンス変数に変更した _widgetOptions
+  final List<Widget> _widgetOptions = <Widget>[
+    AccountSettingPage(),
+    const WriteScreen(),
+    const OpenScreen(),
+    const SizedBox(), // FutureBuilder内で処理するのでここは空のウィジェットに
+     SettingPage(),
+  ];
 }

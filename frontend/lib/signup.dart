@@ -1,6 +1,62 @@
 import 'package:flutter/material.dart';
 import 'signup2.dart';
-class SignUpPage extends StatelessWidget {
+import 'package:dialy/home_screen.dart';
+import 'package:dialy/main.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+
+class SignUpPage extends StatefulWidget {
+  @override
+  _SignUpPageState createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  Future<void> signUp() async {
+    final String email = emailController.text;
+    final String password = passwordController.text;
+
+    // リクエストするエンドポイントのURL
+    final String url = 'http://localhost:8000/users/';
+
+    // リクエストボディ
+    final Map<String, String> body = {
+      'email': email,
+      'password': password,
+      "password_confirm": password
+    };
+
+    // POSTリクエストを送信
+    try {
+      final http.Response response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(body),
+      );
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+            final responseData = jsonDecode(response.body);
+
+      // USERIDをグローバル変数に保存
+      USERID = responseData['id'];
+        // アカウント登録成功時の処理
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SignUpCompletePage()),
+        );
+      } else {
+        // アカウント登録失敗時の処理
+        print('アカウント登録に失敗しました: ${response.body}');
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,41 +68,29 @@ class SignUpPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('ユーザ名'),
-            const TextField(
-                decoration:InputDecoration(
-                    border:OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.account_circle),
-
-                )
-            ),
-
             const Text('メールアドレス'),
-            const TextField(
-                decoration:InputDecoration(
-                    border:OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.mail),
-                    hintText: 'xxx@xxx.com'
-                )
-            ),
-            const Text('パスワード'),
-            const TextField(
-                decoration:InputDecoration(
-                    border:OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.key),
-
-                )
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignUpCompletePage()),
-                );
-              },
-              child: const Text(
-                "アカウント登録",
+            TextField(
+              controller: emailController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.mail),
+                hintText: 'xxx@xxx.com',
               ),
+            ),
+            const SizedBox(height: 16),
+            const Text('パスワード'),
+            TextField(
+              controller: passwordController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.key),
+              ),
+              obscureText: true,  // パスワード入力を隠す
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: signUp,  // ボタンが押された時にsignUp関数を呼び出す
+              child: const Text("アカウント登録"),
             ),
           ],
         ),
