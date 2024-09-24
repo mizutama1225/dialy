@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'home_screen.dart';
 
 class LogInPage extends StatelessWidget {
   @override
@@ -33,7 +34,7 @@ class LogInPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
                 );
               },
               child: const Text(

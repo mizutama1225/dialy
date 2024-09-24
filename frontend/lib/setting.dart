@@ -13,15 +13,6 @@ class SettingPage extends StatelessWidget {
         title: const Text('設定'),
         automaticallyImplyLeading: false,
       ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "アカウント"),
-            BottomNavigationBarItem(icon: Icon(Icons.edit), label: "かきこむ"),
-            BottomNavigationBarItem(icon: Icon(Icons.email), label: "閲覧"),
-            BottomNavigationBarItem(icon: Icon(Icons.inbox), label: "履歴"),
-            BottomNavigationBarItem(icon: Icon(Icons.settings), label: "設定"),
-        ],),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

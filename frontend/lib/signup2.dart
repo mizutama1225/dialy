@@ -1,3 +1,4 @@
+import 'package:dialy/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'login.dart';
@@ -26,7 +27,7 @@ class SignUpCompletePage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
                   );
                 },
                 child: const Text(

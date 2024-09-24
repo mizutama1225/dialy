@@ -1,4 +1,4 @@
-import 'package:dialy/AccountSetting.dart';
+import 'package:dialy/account.dart';
 import 'package:dialy/models/dialy.dart';
 import 'package:flutter/material.dart';
 import 'package:dialy/dialy_list.dart';
@@ -22,7 +22,7 @@ class _HomeScreen extends State<HomeScreen> {
   bool newDialyArrived = true;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    AccountSettingPage(),
+    AccountPage(),
     const WriteScreen(),
     const OpenScreen(),
     DialyList(dialies: [
