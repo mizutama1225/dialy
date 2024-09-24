@@ -11,26 +11,25 @@ class DialyList extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      body: Background(
-        // childWidget: ListView.builder(
-        //   itemCount: dialies.length,
-        //   itemBuilder: (ctx, index) => Dismissible(
-        //     key: ValueKey(dialies[index]),
-        //     child: DialyItem(dialies[index]),
-        //   ),
-        // ),
-        childWidget: ListView.separated(
-            itemBuilder: (ctx, index) => Container(
-                  padding: const EdgeInsets.all(15),
-                  child: DialyItem(dialies[index]),
-                ),
-            separatorBuilder: (ctx, index) {
-              return const Divider(
-                height: 0.5,
-              );
-            },
-            itemCount: dialies.length),
-      ),
+      body:
+          // childWidget: ListView.builder(
+          //   itemCount: dialies.length,
+          //   itemBuilder: (ctx, index) => Dismissible(
+          //     key: ValueKey(dialies[index]),
+          //     child: DialyItem(dialies[index]),
+          //   ),
+          // ),
+          ListView.separated(
+              itemBuilder: (ctx, index) => Container(
+                    padding: const EdgeInsets.all(15),
+                    child: DialyItem(dialies[index]),
+                  ),
+              separatorBuilder: (ctx, index) {
+                return const Divider(
+                  height: 0.5,
+                );
+              },
+              itemCount: dialies.length),
     );
   }
 }

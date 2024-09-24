@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:dialy/appBarGradiant.dart';
 
 class WriteScreen extends StatefulWidget {
   const WriteScreen({super.key});
@@ -23,62 +24,86 @@ class _WriteScreenState extends State<WriteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 20),
-          child: Text(
-            '新規日記作成',
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-        Padding(
-          padding:
-              const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 15),
-          child: TextField(
-            decoration: const InputDecoration(
-                // border: OutlineInputBorder(),
-                counterStyle: TextStyle(),
-                border: InputBorder.none,
-                fillColor: Color.fromARGB(255, 233, 212, 118),
-                filled: true),
-            style: const TextStyle(
-              fontSize: 28,
-            ),
-            controller: _textController,
-            // inputFormatters: [LengthLimitingTextInputFormatter(100)],
-            maxLength: 100,
-            maxLines: 10,
-            onChanged: (value) {
-              setState(() {
-                value == "" ? enableButton = false : enableButton = true;
-              });
-            },
-          ),
-        ),
-        ElevatedButton.icon(
-          label: Text(
-            "送信",
-            style: TextStyle(
-                color: enableButton
-                    ? const Color.fromRGBO(93, 224, 230, 1)
-                    : const Color.fromRGBO(89, 118, 121, 1)),
-          ),
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(0),
-              // side: const BorderSide(color: Colors.white),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("新規日記作成"),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 15),
+            child: TextField(
+              decoration: const InputDecoration(
+                  // border: OutlineInputBorder(),
+                  counterStyle: TextStyle(),
+                  border: InputBorder.none,
+                  fillColor: Color.fromARGB(255, 233, 212, 118),
+                  filled: true),
+              style: const TextStyle(
+                fontSize: 28,
+              ),
+              controller: _textController,
+              // inputFormatters: [LengthLimitingTextInputFormatter(100)],
+              maxLength: 100,
+              maxLines: 10,
+              onChanged: (value) {
+                setState(() {
+                  value == "" ? enableButton = false : enableButton = true;
+                });
+              },
             ),
           ),
-          onPressed: enableButton ? sendDialy : null,
-          icon: Icon(
-            Icons.send,
-            color: enableButton
-                ? const Color.fromRGBO(93, 224, 230, 1)
-                : const Color.fromRGBO(89, 118, 121, 1),
+          Container(
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [
+                  Color.fromRGBO(93, 224, 230, 1),
+                  Color.fromRGBO(0, 74, 173, 1)
+                ],
+              ),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.grey,
+                  offset: Offset(0.0, 1.5),
+                  blurRadius: 1.5,
+                ),
+              ],
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: sendDialy,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                  child: const SizedBox(
+                    width: 65,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                          Icons.send,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          '送信',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
-        )
-      ],
+        ],
+      ),
     );
   }
 }

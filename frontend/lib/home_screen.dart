@@ -9,7 +9,12 @@ import 'package:dialy/background.dart';
 import 'package:badges/badges.dart' as badges;
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key});
+  HomeScreen({Key? key});
+
+  late int index;
+  set setIndex(int index) {
+    this.index = index;
+  }
 
   @override
   _HomeScreen createState() {
@@ -19,7 +24,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   int _selectedIndex = 3;
-  bool newDialyArrived = true;
+
+  bool newDialyArrived = false;
 
   static final List<Widget> _widgetOptions = <Widget>[
     AccountSettingPage(),
@@ -55,8 +61,28 @@ class _HomeScreen extends State<HomeScreen> {
   Widget build(context) {
     return (MaterialApp(
       home: Scaffold(
-        body: Background(
-          childWidget: _widgetOptions.elementAt(_selectedIndex),
+        body: _widgetOptions.elementAt(_selectedIndex),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: badges.Badge(
+          showBadge: newDialyArrived,
+          badgeContent: Text(
+            '!',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          badgeStyle: badges.BadgeStyle(
+            badgeColor: Color.fromRGBO(93, 224, 230, 1),
+          ),
+          child: FloatingActionButton(
+            onPressed: () => _onItemTapped(2),
+            backgroundColor: Colors.black,
+            child: const Icon(
+              Icons.email,
+              color: Colors.white,
+            ),
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
