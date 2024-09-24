@@ -53,7 +53,7 @@ class _MainAppState extends State<MainApp> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(child: SignUpPage()),
+        body: Center(child: LogInPage()),
       ),
     );
   }
