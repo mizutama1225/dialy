@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:dialy/login.dart';
 import 'package:dialy/signup.dart';
 
-String? USERID;
+import 'package:dialy/home_screen.dart';
+import 'package:dialy/firstpage.dart';
 
+String? USERID;
 void main() {
   runApp(const MaterialApp(home: MainApp()));
 }

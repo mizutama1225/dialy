@@ -58,7 +58,7 @@ class _OpenScreenState extends State<OpenScreen> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 60),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -67,7 +67,7 @@ class _OpenScreenState extends State<OpenScreen> {
                 size: 35,
               ),
               if (newDialies.isNotEmpty)
-                Text("${newDialies[dialyIndex]['from']['username']}さんからの日記"),
+                Text("${newDialies[dialyIndex]['from']['username']}さんからの日記",style: TextStyle(fontSize: 20)),
             ],
           ),
         ),
@@ -79,10 +79,14 @@ class _OpenScreenState extends State<OpenScreen> {
               width: 300,
               height: 450,
               child: newDialies.isNotEmpty
-                  ? Text(
+                  ?  Padding(
+                    padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                    child :   Text(
                       newDialies[dialyIndex]['letter'],
-                      style: const TextStyle(fontSize: 28),
+                      style: const TextStyle(fontSize: 15),
                     )
+                  )
+
                   : const Text('データがありません')),
         ),
         Row(

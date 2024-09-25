@@ -36,6 +36,8 @@ dependencies:
   badges: ^3.1.2
   intl: ^0.19.0
   http: ^0.13.0
+  google_fonts: ^4.0.4
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -80,6 +82,9 @@ flutter:
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
+
+  fonts:
+    - family:
   # example:
   # fonts:
   #   - family: Schyler
