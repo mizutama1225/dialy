@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import 'package:dialy/account.dart';
+>>>>>>> account
 import 'package:dialy/models/dialy.dart';
 import 'package:flutter/material.dart';
 import 'package:dialy/main.dart';
@@ -23,6 +27,7 @@ class _HomeScreen extends State<HomeScreen> {
   bool newDialyArrived = true;
   Future<List<Dialy>>? _futureDialies;
 
+<<<<<<< HEAD
   @override
   void initState() {
     super.initState();
@@ -47,6 +52,31 @@ class _HomeScreen extends State<HomeScreen> {
       throw Exception('Failed to load dialies');
     }
   }
+=======
+  static final List<Widget> _widgetOptions = <Widget>[
+    AccountPage(),
+    const WriteScreen(),
+    const OpenScreen(),
+    DialyList(dialies: [
+      Dialy(
+        userName: "ユーザー1",
+        dialyText: "aaa",
+        updatedDate: DateTime(10, 9, 21),
+      ),
+      Dialy(
+        userName: "ユーザー2",
+        dialyText: "bbb",
+        updatedDate: DateTime(10, 9, 20),
+      ),
+      Dialy(
+        userName: "ユーザー3",
+        dialyText: "ccc",
+        updatedDate: DateTime(10, 9, 19),
+      ),
+    ]),
+    SettingPage(),
+  ];
+>>>>>>> account
 
   void _onItemTapped(int index) {
     setState(() {

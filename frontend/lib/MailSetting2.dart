@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'setting.dart';
 
 
 class MailSetting2Page extends StatelessWidget {
@@ -28,7 +29,7 @@ class MailSetting2Page extends StatelessWidget {
                     ElevatedButton(onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MailSetting2Page()),
+                        MaterialPageRoute(builder: (context) => SettingPage()),
                       );
                     },
                       child: const Text('認証する'),)

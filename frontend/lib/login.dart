@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'main.dart';
+import 'home_screen.dart';
 
 class LogInPage extends StatefulWidget {
   @override
@@ -88,7 +89,16 @@ class _LogInPageState extends State<LogInPage> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
+<<<<<<< HEAD
               onPressed: login,
+=======
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },
+>>>>>>> account
               child: const Text(
                 "ログイン",
               ),
