@@ -3,30 +3,30 @@ import 'main.dart';
 import 'AccountSetting.dart';
 import 'PrivacySetting.dart';
 import 'Help.dart';
+import 'background.dart';
+import 'firstpage.dart';
 
 class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('設定'),
-        automaticallyImplyLeading: false,
-      ),
-      body: Center(
+      body: Background(childWidget:
+
+      Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            const SizedBox(height: 80,),
             SizedBox(
               width: double.infinity,
               height:60,
               child:
                 TextButton.icon(
-                    icon: Icon(Icons.account_circle),
+                    icon: Icon(Icons.account_circle,color: Colors.black),
                     label:
                     Align(
                         alignment: Alignment.centerLeft,
-                        child: Text('アカウント設定', style:TextStyle(fontSize:20)),
+                        child: Text('アカウント設定', style:TextStyle(fontSize:20, color: Colors.black)),
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -42,11 +42,11 @@ class SettingPage extends StatelessWidget {
               height:60,
               child:
               TextButton.icon(
-                icon: Icon(Icons.verified_user),
+                icon: Icon(Icons.verified_user,color: Colors.black),
                 label:
                 Align(
                   alignment: Alignment.centerLeft,
-                  child:Text('プライバシー設定', style:TextStyle(fontSize:20),textAlign: TextAlign.left),
+                  child:Text('プライバシー設定', style:TextStyle(fontSize:20,color: Colors.black),textAlign: TextAlign.left),
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -61,11 +61,11 @@ class SettingPage extends StatelessWidget {
                 height:60,
                 child:
                 TextButton.icon(
-                  icon: Icon(Icons.help),
+                  icon: Icon(Icons.help,color: Colors.black),
                   label:
                   Align(
                     alignment: Alignment.centerLeft,
-                    child:Text('ヘルプ', style:TextStyle(fontSize:20),textAlign: TextAlign.left),
+                    child:Text('ヘルプ', style:TextStyle(fontSize:20,color: Colors.black),textAlign: TextAlign.left),
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -79,6 +79,6 @@ class SettingPage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

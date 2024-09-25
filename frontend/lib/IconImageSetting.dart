@@ -1,4 +1,6 @@
+import 'package:dialy/background.dart';
 import 'package:flutter/material.dart';
+import 'AccountSetting.dart';
 import 'main.dart';
 import 'PasswordSetting2.dart';
 import 'dart:io';
@@ -33,18 +35,12 @@ class _IconImageSettingPageState extends State<IconImageSettingPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .inversePrimary,
-        title: const Text('プロフィール画像変更'),
-      ),
-      body: Center(
+      body: Background(childWidget:
+        Center(
           child: Column(
             children: [
               const SizedBox(
-                height:30,
+                height:90,
               ),
 
               Container(
@@ -70,9 +66,17 @@ class _IconImageSettingPageState extends State<IconImageSettingPage>{
                 icon: const Icon(Icons.photo),
                 label: const Text('ライブラリから写真を選択する'),
               ),
+              SizedBox(height: 50,),
+              ElevatedButton(onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AccountSettingPage()),
+                );
+              },
+                child: const Text('アカウント設定に戻る'),)
             ],
           )
       ),
-    );
+    ));
   }
 }

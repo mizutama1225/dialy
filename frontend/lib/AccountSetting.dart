@@ -1,7 +1,10 @@
+import 'package:dialy/background.dart';
+import 'package:dialy/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'setting.dart';
 import 'UserNameSetting.dart';
+import 'IntroductionSetting.dart';
 import 'IconImageSetting.dart';
 
 
@@ -9,18 +12,14 @@ class AccountSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('アカウント設定'),
-        automaticallyImplyLeading: false,
-      ),
-      body: Center(
+      body: Background(childWidget:
+        Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(
-              height:30,
-            ),
+            const SizedBox(height: 80,),
+            const Text('アカウント設定',style: TextStyle(fontSize: 30,color:Colors.white),),
+            const SizedBox(height: 30,),
             Row(
               children:[
                 const Text('　　ユーザー名'),
@@ -41,7 +40,7 @@ class AccountSettingPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => UserNameSettingPage()),
+                        MaterialPageRoute(builder: (context) => IntroductionSettingPage()),
                       );
                     },
                     child: const Text("Input_Introduction"),
@@ -76,17 +75,21 @@ class AccountSettingPage extends StatelessWidget {
         const SizedBox(
           height:50,
         ),
-        ElevatedButton(onPressed: () {
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor:Colors.white,
+          ),
+          onPressed: () {
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SettingPage()),
+              MaterialPageRoute(builder: (context) => HomeScreen()),
           );
         },
-            child: Text('設定に戻る')),
+            child: Text('ホームに戻る')),
 
           ],
         ),
       ),
-    );
+    ));
   }
 }
