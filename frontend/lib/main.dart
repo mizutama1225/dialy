@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dialy/home_screen.dart';
+import 'package:dialy/firstpage.dart';
 
 // void main() {
 //   runApp(
@@ -46,9 +47,9 @@ class _MainAppState extends State<MainApp> {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: const Scaffold(
+      child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(child: HomeScreen()),
+        body: Center(child: FirstPage()),
       ),
     );
   }
