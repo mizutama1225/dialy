@@ -20,7 +20,8 @@ class Profile {
   final String introduction;
   final String icon;
 
-  Profile({required this.username, required this.introduction, required this.icon});
+  Profile(
+      {required this.username, required this.introduction, required this.icon});
 
   factory Profile.fromJson(Map<String, dynamic> json) {
     return Profile(
@@ -33,12 +34,12 @@ class Profile {
 
 class Dialy {
   final String userName;
-  final String dialyText;
+  final List<String> dialyTexts;
   final DateTime updatedDate;
 
   Dialy({
     required this.userName,
-    required this.dialyText,
+    required this.dialyTexts,
     required this.updatedDate,
   });
 
@@ -47,9 +48,13 @@ class Dialy {
   }
 
   factory Dialy.fromJson(Map<String, dynamic> json) {
+    var letters = json['letters'];
+    var dialyTexts =
+        letters.map<String>((letter) => letter['content']).toList();
+
     return Dialy(
       userName: json['profile']['username'],
-      dialyText: json['letters'][0]['content'],  // 必要に応じて調整
+      dialyTexts: dialyTexts, // 必要に応じて調整
       updatedDate: DateTime.parse(json['letters'][0]['date']),
     );
   }

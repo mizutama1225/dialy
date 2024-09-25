@@ -15,7 +15,10 @@ class _WriteScreenState extends State<WriteScreen> {
   var _text = "";
   bool enableButton = false;
 
-  final _snackBar = const SnackBar(content: Text("日記を送信しました"));
+  final _snackBar = const SnackBar(
+    content: Text("日記を送信しました"),
+    behavior: SnackBarBehavior.floating,
+  );
 
   // HTTPリクエストを送信する関数
   void sendDialy() async {
@@ -58,7 +61,7 @@ class _WriteScreenState extends State<WriteScreen> {
         const Padding(
           padding: EdgeInsets.only(top: 20),
           child: Text(
-            '新規日記作成',
+            '新規Dialy作成',
             style: TextStyle(fontSize: 20),
           ),
         ),

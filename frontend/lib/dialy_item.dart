@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:dialy/models/dialy.dart';
 import 'package:dialy/user_history.dart';
 
-
 class DialyItem extends StatelessWidget {
   const DialyItem(this.dialy, {super.key});
   final Dialy dialy;
@@ -26,13 +25,13 @@ class DialyItem extends StatelessWidget {
                 dialy.userName, // dialyオブジェクトのuserNameを表示
                 style: const TextStyle(fontSize: 18),
               ),
-              Text(
-                dialy.dialyText, // dialyオブジェクトのdialyTextを表示
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 66, 64, 64),
-                  fontSize: 15,
-                ),
-              ),
+              // Text(
+              //   dialy.dialyText, // dialyオブジェクトのdialyTextを表示
+              //   style: const TextStyle(
+              //     color: Color.fromARGB(255, 66, 64, 64),
+              //     fontSize: 15,
+              //   ),
+              // ),
             ],
           ),
           const Spacer(),

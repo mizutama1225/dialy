@@ -15,15 +15,15 @@ class _OpenScreenState extends State<OpenScreen> {
   List<Dialy> newDialies = [
     Dialy(
         userName: "ユーザー1",
-        dialyText: "はじめまして--------",
+        dialyTexts: ["はじめまして--------"],
         updatedDate: DateTime(10, 10, 10)),
     Dialy(
         userName: "ユーザー2",
-        dialyText: "こんにちは--------",
+        dialyTexts: ["こんにちは--------"],
         updatedDate: DateTime(10, 10, 10)),
     Dialy(
         userName: "ユーザー3",
-        dialyText: "Hello--------",
+        dialyTexts: ["Hello--------"],
         updatedDate: DateTime(10, 10, 10)),
   ];
 
@@ -68,7 +68,7 @@ class _OpenScreenState extends State<OpenScreen> {
               width: 300,
               height: 450,
               child: Text(
-                newDialies[dialyIndex].dialyText,
+                newDialies[dialyIndex].dialyTexts[0],
                 style: const TextStyle(fontSize: 28),
               )),
         ),
