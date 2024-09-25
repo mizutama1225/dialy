@@ -1,31 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:dialy/models/dialy.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:dialy/main.dart';
 
 class OpenScreen extends StatefulWidget {
   const OpenScreen({super.key});
   @override
-  State<OpenScreen> createState() {
-    return _OpenScreenState();
-  }
+  State<OpenScreen> createState() => _OpenScreenState();
 }
 
 class _OpenScreenState extends State<OpenScreen> {
   int dialyIndex = 0;
+  List<dynamic> newDialies = []; // 初期値は空のリスト
 
-  List<Dialy> newDialies = [
-    Dialy(
-        userName: "ユーザー1",
-        dialyText: "はじめまして--------",
-        updatedDate: DateTime(10, 10, 10)),
-    Dialy(
-        userName: "ユーザー2",
-        dialyText: "こんにちは--------",
-        updatedDate: DateTime(10, 10, 10)),
-    Dialy(
-        userName: "ユーザー3",
-        dialyText: "Hello--------",
-        updatedDate: DateTime(10, 10, 10)),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    fetchDialies();
+  }
+
+  Future<void> fetchDialies() async {
+    try {
+      var url = Uri.parse('http://localhost:8000/users/${USERID}/unchecked_letters/'); // USERIDを適切なユーザーIDに置き換えてください
+      var response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        var jsonData = json.decode(response.body);
+        setState(() {
+          newDialies = jsonData;
+        });
+      } else {
+        throw Exception('Failed to load data');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   void _incrementIndex() {
     if (dialyIndex < newDialies.length - 1) {
@@ -56,7 +66,8 @@ class _OpenScreenState extends State<OpenScreen> {
                 Icons.person,
                 size: 35,
               ),
-              Text("${newDialies[dialyIndex].userName}さんからの日記")
+              if (newDialies.isNotEmpty)
+                Text("${newDialies[dialyIndex]['from']['username']}さんからの日記"),
             ],
           ),
         ),
@@ -67,10 +78,12 @@ class _OpenScreenState extends State<OpenScreen> {
                   color: Color.fromARGB(255, 233, 125, 118)),
               width: 300,
               height: 450,
-              child: Text(
-                newDialies[dialyIndex].dialyText,
-                style: const TextStyle(fontSize: 28),
-              )),
+              child: newDialies.isNotEmpty
+                  ? Text(
+                      newDialies[dialyIndex]['letter'],
+                      style: const TextStyle(fontSize: 28),
+                    )
+                  : const Text('データがありません')),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -81,7 +94,8 @@ class _OpenScreenState extends State<OpenScreen> {
                   Icons.arrow_back,
                   color: dialyIndex > 0 ? Colors.black87 : Colors.black38,
                 )),
-            Text("${dialyIndex + 1}/${newDialies.length}"),
+            if (newDialies.isNotEmpty)
+              Text("${dialyIndex + 1}/${newDialies.length}"),
             IconButton(
                 onPressed: _incrementIndex,
                 icon: Icon(
