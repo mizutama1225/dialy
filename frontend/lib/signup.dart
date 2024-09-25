@@ -21,7 +21,7 @@ class _SignUpPageState extends State<SignUpPage> {
     final String password = passwordController.text;
 
     // リクエストするエンドポイントのURL
-    final String url = 'http://localhost:8000/users/';
+    final String url = 'http://localhost:80/users/';
 
     // リクエストボディ
     final Map<String, String> body = {

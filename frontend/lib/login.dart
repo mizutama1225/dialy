@@ -19,7 +19,7 @@ class _LogInPageState extends State<LogInPage> {
     final String password = passwordController.text;
 
     // リクエストするエンドポイント
-    final String url = 'http://localhost:8000/login/login/';
+    final String url = 'http://localhost:80/login/login/';
 
     // リクエストボディ
     final Map<String, String> body = {

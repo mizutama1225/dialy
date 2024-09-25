@@ -22,7 +22,7 @@ class _WriteScreenState extends State<WriteScreen> {
     _text = _textController.text;
 
     // 送信先のURL
-    final String url = 'http://localhost:8000/writtenletter/';
+    final String url = 'http://localhost:80/writtenletter/';
 
     // リクエストボディ
     final Map<String, String> body = {

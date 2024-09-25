@@ -21,7 +21,7 @@ class _OpenScreenState extends State<OpenScreen> {
 
   Future<void> fetchDialies() async {
     try {
-      var url = Uri.parse('http://localhost:8000/users/${USERID}/unchecked_letters/'); // USERIDを適切なユーザーIDに置き換えてください
+      var url = Uri.parse('http://localhost:80/users/${USERID}/unchecked_letters/'); // USERIDを適切なユーザーIDに置き換えてください
       var response = await http.get(url);
 
       if (response.statusCode == 200) {

@@ -32,7 +32,7 @@ class _HomeScreen extends State<HomeScreen> {
 
   Future<List<Dialy>> fetchDialies() async {
     final response = await http
-        .get(Uri.parse('http://localhost:8000/users/${USERID}/letters/'));
+        .get(Uri.parse('http://localhost:80/users/${USERID}/letters/'));
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
