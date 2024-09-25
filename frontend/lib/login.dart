@@ -89,16 +89,7 @@ class _LogInPageState extends State<LogInPage> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-<<<<<<< HEAD
               onPressed: login,
-=======
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },
->>>>>>> account
               child: const Text(
                 "ログイン",
               ),
