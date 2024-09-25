@@ -1,4 +1,4 @@
-import 'package:dialy/account.dart';
+import 'package:dialy/AccountSetting.dart';
 import 'package:dialy/models/dialy.dart';
 import 'package:flutter/material.dart';
 import 'package:dialy/main.dart';
@@ -7,7 +7,6 @@ import 'package:dialy/write_screen.dart';
 import 'package:dialy/open_screen.dart';
 import 'package:dialy/setting.dart';
 import 'package:dialy/background.dart';
-import 'package:dialy/AccountSetting.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
