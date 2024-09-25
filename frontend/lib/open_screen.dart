@@ -8,7 +8,7 @@ class OpenScreen extends StatelessWidget {
     return Column(
       children: [
         const Padding(
-          padding: EdgeInsets.only(top: 20),
+          padding: EdgeInsets.only(top: 60),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -16,7 +16,7 @@ class OpenScreen extends StatelessWidget {
                 Icons.person,
                 size: 35,
               ),
-              Text("{ユーザー名}さんからの日記")
+              Text("{ユーザー名}さんからの日記",style: TextStyle(fontSize: 20),)
             ],
           ),
         ),
@@ -27,10 +27,14 @@ class OpenScreen extends StatelessWidget {
                   color: Color.fromARGB(255, 233, 125, 118)),
               width: 300,
               height: 450,
-              child: const Text(
-                '日記の内容',
-                style: TextStyle(fontSize: 28),
-              )),
+              child: const Padding(
+                  padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+                  child:Text(
+                      '今日は歯医者に行った',
+                      style: TextStyle(fontSize: 15),
+                  )
+              ),
+        ),
         ),
       ],
     );

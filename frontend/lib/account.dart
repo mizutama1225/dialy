@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 import 'IconImageSetting.dart';
+import 'background.dart';
 
 class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .inversePrimary,
-        title: const Text('アカウントページ'),
-        automaticallyImplyLeading: false,
-      ),
-      body: Center(
+      body: Background(
+
+        childWidget:
+      Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 40,),
+            const SizedBox(height: 80,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -59,6 +55,6 @@ class AccountPage extends StatelessWidget {
 
         ),
       ),
-    );
+    ));
   }
 }
