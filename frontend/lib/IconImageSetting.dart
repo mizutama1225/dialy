@@ -21,7 +21,27 @@ class IconImageSettingPage extends StatefulWidget {
 
 class _IconImageSettingPageState extends State<IconImageSettingPage> {
   File? _image;
+  String iconUrl = "loading..."; // バックエンドから取得するアイコンURL
   final picker = ImagePicker();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchIconUrl(); // 初期化時にアイコンを取得
+  }
+
+  Future<void> fetchIconUrl() async {
+    final response = await http.get(Uri.parse('http://localhost:80/profiles/${USERID}/'));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      setState(() {
+        iconUrl = data['icon']; // バックエンドから取得したURLをセット
+      });
+    } else {
+      throw Exception('Failed to load icon');
+    }
+  }
 
   Future<void> getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -74,7 +94,11 @@ class _IconImageSettingPageState extends State<IconImageSettingPage> {
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: (_image != null) ? FileImage(_image!) : const AssetImage('image/SNS_Icon.jpg') as ImageProvider,
+                    image: (_image != null)
+                        ? FileImage(_image!)
+                        : (iconUrl != "loading...")
+                            ? NetworkImage(iconUrl)
+                            : const AssetImage('image/SNS_Icon.jpg') as ImageProvider,
                   ),
                 ),
               ),
