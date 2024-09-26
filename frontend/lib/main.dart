@@ -7,6 +7,7 @@ import 'package:dialy/home_screen.dart';
 import 'package:dialy/firstpage.dart';
 
 String? USERID;
+String? IMAGEURL;
 void main() {
   runApp(const MaterialApp(home: MainApp()));
 }
