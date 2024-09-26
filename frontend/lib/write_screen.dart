@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dialy/background.dart';
 import 'package:flutter/material.dart';
 import 'package:dialy/main.dart';
 import 'package:http/http.dart' as http;
@@ -53,7 +54,9 @@ class _WriteScreenState extends State<WriteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Scaffold(
+        body:Background(childWidget:
+    Column(
       children: [
         const Padding(
           padding: EdgeInsets.only(top: 20),
@@ -106,6 +109,6 @@ class _WriteScreenState extends State<WriteScreen> {
           ),
         )
       ],
-    );
+    )));
   }
 }

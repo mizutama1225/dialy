@@ -79,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
                   child: Text('ログイン画面に切り替える'))],
             ),
-
+          SizedBox(height: 50,),
             const Text('メールアドレス'),
             TextField(
               controller: emailController,

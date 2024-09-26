@@ -1,3 +1,4 @@
+import 'package:dialy/background.dart';
 import 'package:flutter/material.dart';
 import 'signup.dart';
 import 'login.dart';
@@ -6,11 +7,8 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Dialyへようこそ'),
-      ),
-      body: Center(
+      body: Background(childWidget:
+        Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -37,6 +35,6 @@ class FirstPage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

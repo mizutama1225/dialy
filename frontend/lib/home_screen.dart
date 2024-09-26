@@ -2,6 +2,7 @@ import 'package:dialy/AccountSetting.dart';
 import 'package:dialy/models/dialy.dart';
 import 'package:flutter/material.dart';
 import 'package:dialy/main.dart';
+import 'account.dart';
 import 'package:dialy/dialy_list.dart';
 import 'package:dialy/write_screen.dart';
 import 'package:dialy/open_screen.dart';
@@ -112,7 +113,7 @@ class _HomeScreen extends State<HomeScreen> {
 
   // 静的ではなくインスタンス変数に変更した _widgetOptions
   final List<Widget> _widgetOptions = <Widget>[
-    AccountSettingPage(),
+    AccountPage(),
     const WriteScreen(),
     const OpenScreen(),
     const SizedBox(), // FutureBuilder内で処理するのでここは空のウィジェットに
