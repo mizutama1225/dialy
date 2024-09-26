@@ -1,4 +1,6 @@
+import 'package:dialy/background.dart';
 import 'package:dialy/home_screen.dart';
+import 'signup.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -60,14 +62,24 @@ class _LogInPageState extends State<LogInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('ログイン'),
-      ),
-      body: Center(
-        child: Column(
+      body: Background(childWidget:
+      Center(
+        child: Padding(padding: EdgeInsets.only(right: 10,left: 10),
+          child:Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUpPage()),
+                    );
+                  },
+                  child: Text('アカウント登録画面に切り替える'))],
+            ),
+            const SizedBox(height: 50,),
             const Text('メールアドレス'),
             TextField(
               controller: emailController,
@@ -75,6 +87,8 @@ class _LogInPageState extends State<LogInPage> {
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.mail),
                 hintText: 'xxx@xxx.com',
+                fillColor: Colors.white70,
+                filled: true,
               ),
             ),
             const SizedBox(height: 16),
@@ -84,6 +98,8 @@ class _LogInPageState extends State<LogInPage> {
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.key),
+                fillColor: Colors.white70,
+                filled: true,
               ),
               obscureText: true, // パスワード入力を隠す
             ),
@@ -97,6 +113,6 @@ class _LogInPageState extends State<LogInPage> {
           ],
         ),
       ),
-    );
+    )));
   }
 }

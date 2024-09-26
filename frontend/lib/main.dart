@@ -34,7 +34,7 @@ class _MainAppState extends State<MainApp> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(child: LogInPage()),
+        body: Center(child: FirstPage()),
       ),
     );
   }
