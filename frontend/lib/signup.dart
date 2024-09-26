@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -41,10 +40,10 @@ class _SignUpPageState extends State<SignUpPage> {
       );
 
       if (response.statusCode == 201 || response.statusCode == 200) {
-            final responseData = jsonDecode(response.body);
+        final responseData = jsonDecode(response.body);
 
-      // USERIDをグローバル変数に保存
-      USERID = responseData['id'];
+        // USERIDをグローバル変数に保存
+        USERID = responseData['id'];
         // アカウント登録成功時の処理
         Navigator.push(
           context,
@@ -62,12 +61,15 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Background(childWidget:
-      Center(
-        child: Padding(padding: EdgeInsets.only(right: 10,left: 10),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('アカウント登録'),
+      ),
+      body: Background(
+        childWidget: Center(
           child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [ElevatedButton(
@@ -80,39 +82,46 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Text('ログイン画面に切り替える'))],
             ),
           SizedBox(height: 50,),
-            const Text('メールアドレス'),
-            TextField(
-              controller: emailController,
+              const Text('メールアドレス'),
+              TextField(
+                controller: emailController,
                 decoration: const InputDecoration(
-                    border:OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.mail),
-                    hintText: 'xxx@xxx.com',
-                    fillColor: Colors.white70,
-                    filled: true,
-                )
-            ),
-
-            const Text('パスワード'),
-            TextField(
-              controller: passwordController,
-                decoration:const InputDecoration(
-                    border:OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.key),
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.mail),
+                  hintText: 'xxx@xxx.com',
                     fillColor: Colors.white70,
                     filled: true,
                 ),
-              obscureText: true,  // パスワード入力を隠す
-            ),
-            const SizedBox(height: 30,),
-            ElevatedButton(
-              onPressed: signUp
-              ,
-              child:
-              const Text("アカウント登録"),
-            ),
-          ],
+              ),
+              const SizedBox(height: 16),
+              const Text('パスワード'),
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.key),
+                    fillColor: Colors.white70,
+                    filled: true,
+                ),
+                obscureText: true, // パスワード入力を隠す
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  onPressed: signUp, // ボタンが押された時にsignUp関数を呼び出す
+                  child: const Text("アカウント登録"),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-    )));
+    );
   }
 }

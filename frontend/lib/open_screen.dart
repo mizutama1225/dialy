@@ -56,31 +56,30 @@ class _OpenScreenState extends State<OpenScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-    body:Background(childWidget:
-      Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 60),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.person,
-                size: 35,
-              ),
+    return Background(
+      childWidget: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 60),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.person,
+                  size: 35,
+                ),
               if (newDialies.isNotEmpty)
                 Text("${newDialies[dialyIndex]['from']['username']}さんからの日記",style: TextStyle(fontSize: 20)),
-            ],
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Container(
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 233, 125, 118)),
-              width: 300,
-              height: 450,
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Container(
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 233, 125, 118)),
+                width: 300,
+                height: 450,
               child: newDialies.isNotEmpty
                   ?  Padding(
                     padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
@@ -92,28 +91,29 @@ class _OpenScreenState extends State<OpenScreen> {
 
                   : const Text('データがありません')),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-                onPressed: _decrementIndex,
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: dialyIndex > 0 ? Colors.black87 : Colors.black38,
-                )),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                  onPressed: _decrementIndex,
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: dialyIndex > 0 ? Colors.black87 : Colors.black38,
+                  )),
             if (newDialies.isNotEmpty)
               Text("${dialyIndex + 1}/${newDialies.length}"),
-            IconButton(
-                onPressed: _incrementIndex,
-                icon: Icon(
-                  Icons.arrow_forward,
-                  color: dialyIndex < newDialies.length - 1
-                      ? Colors.black87
-                      : Colors.black38,
-                )),
-          ],
-        )
-      ],
-    )));
+              IconButton(
+                  onPressed: _incrementIndex,
+                  icon: Icon(
+                    Icons.arrow_forward,
+                    color: dialyIndex < newDialies.length - 1
+                        ? Colors.black87
+                        : Colors.black38,
+                  )),
+            ],
+          )
+        ],
+      ),
+    );
   }
 }

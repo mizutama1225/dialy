@@ -39,12 +39,10 @@ class _LogInPageState extends State<LogInPage> {
       );
 
       if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
 
-
-      final responseData = jsonDecode(response.body);
-
-      // USERIDをグローバル変数に保存
-      USERID = responseData['id'];
+        // USERIDをグローバル変数に保存
+        USERID = responseData['id'];
         // ログイン成功時の処理
         Navigator.push(
           context,
@@ -62,57 +60,53 @@ class _LogInPageState extends State<LogInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Background(childWidget:
-      Center(
-        child: Padding(padding: EdgeInsets.only(right: 10,left: 10),
-          child:Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignUpPage()),
-                    );
-                  },
-                  child: Text('アカウント登録画面に切り替える'))],
-            ),
-            const SizedBox(height: 50,),
-            const Text('メールアドレス'),
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.mail),
-                hintText: 'xxx@xxx.com',
-                fillColor: Colors.white70,
-                filled: true,
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('ログイン'),
+      ),
+      body: Background(
+        childWidget: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('メールアドレス'),
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.mail),
+                  hintText: 'xxx@xxx.com',
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            const Text('パスワード'),
-            TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.key),
-                fillColor: Colors.white70,
-                filled: true,
+              const SizedBox(height: 16),
+              const Text('パスワード'),
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.key),
+                ),
+                obscureText: true, // パスワード入力を隠す
               ),
-              obscureText: true, // パスワード入力を隠す
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: login,
-              child: const Text(
-                "ログイン",
+              const SizedBox(height: 16),
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  onPressed: login,
+                  child: const Text(
+                    "ログイン",
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    )));
+    );
   }
 }

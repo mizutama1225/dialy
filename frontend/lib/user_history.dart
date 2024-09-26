@@ -50,36 +50,39 @@ class _UserHistoryState extends State<UserHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("戻る"),
+      ),
       body: Background(childWidget:
         dateFormat == null // ロケールデータが初期化されるまで待つ
           ? const Center(child: CircularProgressIndicator())
           : Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
                     children: [
-                      Column(
-                        children: [
                           CircleAvatar(
                             backgroundImage: widget.user.imageUrl.isNotEmpty
                                 ? NetworkImage("http://localhost:8000/" + widget.user.imageUrl)
                                 : const AssetImage('image/SNS_Icon.jpg')
                                     as ImageProvider,
                             radius: 30,
-                          ),
-                          Text(
-                            widget.user.userName,
-                            style: TextStyle(
-                                color: dialyIndex % 2 == 0
-                                    ? Colors.red
-                                    : Colors.black),
-                          )
-                        ],
                       ),
-                      Column(
-                        children: [
+                      Text(
+                        widget.user.userName,
+                        style: TextStyle(
+                            color: dialyIndex % 2 == 0
+                                ? Colors.red
+                                : Colors.black),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
                           const Icon(
                             Icons.person,
                             color: Colors.black,
@@ -87,19 +90,19 @@ class _UserHistoryState extends State<UserHistory> {
                           const Text(
                             "あなた",
                             style: TextStyle(color: Colors.black),
-                          ),
-                        ],
                       ),
                     ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 233, 125, 118)),
-                    width: 300,
-                    height: 450,
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Container(
+                  decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 233, 125, 118)),
+                  width: 300,
+                  height: 450,
                     child: Column(
                       children: [
                         Padding(
@@ -119,29 +122,30 @@ class _UserHistoryState extends State<UserHistory> {
                       ],
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    IconButton(
-                        onPressed: _decrementIndex,
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: dialyIndex > 0 ? Colors.black87 : Colors.black38,
-                        )),
-                    Text("${dialyIndex + 1}/${widget.user.contents.length}"),
-                    IconButton(
-                        onPressed: _incrementIndex,
-                        icon: Icon(
-                          Icons.arrow_forward,
-                          color: dialyIndex < widget.user.contents.length - 1
-                              ? Colors.black87
-                              : Colors.black38,
-                        )),
-                  ],
-                )
-              ],
             ),
-    ));
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                    onPressed: _decrementIndex,
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: dialyIndex > 0 ? Colors.black87 : Colors.black38,
+                    )),
+                    Text("${dialyIndex + 1}/${widget.user.contents.length}"),
+                IconButton(
+                    onPressed: _incrementIndex,
+                    icon: Icon(
+                      Icons.arrow_forward,
+                          color: dialyIndex < widget.user.contents.length - 1
+                          ? Colors.black87
+                          : Colors.black38,
+                    )),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
