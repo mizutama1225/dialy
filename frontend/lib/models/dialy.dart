@@ -1,19 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-class Letter {
-  final String content;
-  final DateTime date;
-
-  Letter({required this.content, required this.date});
-
-  factory Letter.fromJson(Map<String, dynamic> json) {
-    return Letter(
-      content: json['content'],
-      date: DateTime.parse(json['date']),
-    );
-  }
-}
 
 class Profile {
   final String username;
@@ -33,24 +20,32 @@ class Profile {
 
 class Dialy {
   final String userName;
-  final String dialyText;
-  final DateTime updatedDate;
+  final List<String> contents;
+  final List<DateTime> dates;
+  final String imageUrl; // 画像のURLフィールドを追加
 
   Dialy({
     required this.userName,
-    required this.dialyText,
-    required this.updatedDate,
+    required this.contents,
+    required this.dates,
+    required this.imageUrl, // 画像URLも必須パラメータに追加
   });
 
-  String get formattedDate {
-    return "${updatedDate.year}-${updatedDate.month}-${updatedDate.day}";
-  }
-
+  // JSONからDialyオブジェクトを生成するファクトリーメソッド
   factory Dialy.fromJson(Map<String, dynamic> json) {
+    final letters = json['letters'];
+    List<String> contents = [];
+    List<DateTime> dates = [];
+    for (var letter in letters) {
+      contents.add(letter['content']);
+      dates.add(DateTime.parse(letter['date']));
+    }
+
     return Dialy(
       userName: json['profile']['username'],
-      dialyText: json['letters'][0]['content'],  // 必要に応じて調整
-      updatedDate: DateTime.parse(json['letters'][0]['date']),
+      contents: contents,
+      dates: dates,
+      imageUrl: json['profile']['icon'] ?? '', // nullチェックをしてデフォルト値を設定
     );
   }
 }

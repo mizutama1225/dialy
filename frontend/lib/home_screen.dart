@@ -42,6 +42,7 @@ class _HomeScreen extends State<HomeScreen> {
         dialies.add(Dialy.fromJson(value));
       });
 
+
       return dialies;
     } else {
       throw Exception('Failed to load dialies');
