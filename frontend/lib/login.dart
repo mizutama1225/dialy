@@ -87,10 +87,18 @@ class _LogInPageState extends State<LogInPage> {
                 obscureText: true, // パスワード入力を隠す
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: login,
-                child: const Text(
-                  "ログイン",
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  onPressed: login,
+                  child: const Text(
+                    "ログイン",
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
                 ),
               ),
             ],

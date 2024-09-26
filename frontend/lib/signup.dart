@@ -89,9 +89,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 obscureText: true, // パスワード入力を隠す
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: signUp, // ボタンが押された時にsignUp関数を呼び出す
-                child: const Text("アカウント登録"),
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  onPressed: signUp, // ボタンが押された時にsignUp関数を呼び出す
+                  child: const Text("アカウント登録"),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
