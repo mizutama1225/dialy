@@ -1,4 +1,4 @@
-import 'package:dialy/AccountSetting.dart';
+import 'package:dialy/account.dart';
 import 'package:dialy/models/dialy.dart';
 import 'package:flutter/material.dart';
 import 'package:dialy/main.dart';
