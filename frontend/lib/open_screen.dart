@@ -1,3 +1,4 @@
+import 'package:dialy/background.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -55,7 +56,9 @@ class _OpenScreenState extends State<OpenScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Scaffold(
+    body:Background(childWidget:
+      Column(
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 60),
@@ -111,6 +114,6 @@ class _OpenScreenState extends State<OpenScreen> {
           ],
         )
       ],
-    );
+    )));
   }
 }

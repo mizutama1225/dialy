@@ -1,3 +1,4 @@
+import 'package:dialy/background.dart';
 import 'package:flutter/material.dart';
 import 'package:dialy/models/dialy.dart';
 import 'package:intl/intl.dart';
@@ -49,10 +50,8 @@ class _UserHistoryState extends State<UserHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("戻る"),
-      ),
-      body: dateFormat == null // ロケールデータが初期化されるまで待つ
+      body: Background(childWidget:
+        dateFormat == null // ロケールデータが初期化されるまで待つ
           ? const Center(child: CircularProgressIndicator())
           : Column(
               children: [
@@ -143,6 +142,6 @@ class _UserHistoryState extends State<UserHistory> {
                 )
               ],
             ),
-    );
+    ));
   }
 }
