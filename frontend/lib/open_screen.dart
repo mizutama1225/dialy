@@ -89,7 +89,7 @@ class _OpenScreenState extends State<OpenScreen> {
                     )
                   )
 
-                  : const Text('データがありません')),
+                  : const Text('日記はまだ届いていません！\n次の日記をお楽しみに！')),
         ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

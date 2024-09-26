@@ -67,7 +67,7 @@ class _UserHistoryState extends State<UserHistory> {
                     children: [
                           CircleAvatar(
                             backgroundImage: widget.user.imageUrl.isNotEmpty
-                                ? NetworkImage("http://localhost:8000/" + widget.user.imageUrl)
+                                ? NetworkImage("http://localhost:80/" + widget.user.imageUrl)
                                 : const AssetImage('image/SNS_Icon.jpg')
                                     as ImageProvider,
                             radius: 30,

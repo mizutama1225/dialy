@@ -21,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   int _selectedIndex = 3;
-  bool newDialyArrived = true;
+  bool newDialyArrived = false;
   Future<List<Dialy>>? _futureDialies;
 
   @override
@@ -70,8 +70,14 @@ class _HomeScreen extends State<HomeScreen> {
                     } else if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     } else if (snapshot.hasData) {
-                      // バックエンドから取得したデータをDialyListに渡す
+                      if(snapshot.data!.isEmpty){
+                        newDialyArrived = false;
                       return DialyList(dialies: snapshot.data!);
+                      }else{
+                        newDialyArrived = true;
+
+                      return DialyList(dialies: snapshot.data!);
+                      }
                     } else {
                       return const Center(child: Text('No data found.'));
                     }

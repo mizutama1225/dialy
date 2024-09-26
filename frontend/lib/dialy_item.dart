@@ -19,7 +19,7 @@ class DialyItem extends StatelessWidget {
           // imageUrlが空かどうかを確認してアイコンを表示
           dialy.imageUrl.isNotEmpty
               ? CircleAvatar(
-                  backgroundImage: NetworkImage( "http://localhost:8000/"+ dialy.imageUrl),
+                  backgroundImage: NetworkImage( "http://localhost:80/"+ dialy.imageUrl),
                   radius: 30,
                 )
               : const CircleAvatar(
