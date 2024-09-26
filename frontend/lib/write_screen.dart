@@ -15,7 +15,10 @@ class _WriteScreenState extends State<WriteScreen> {
   var _text = "";
   bool enableButton = false;
 
-  final _snackBar = const SnackBar(content: Text("日記を送信しました"));
+  final _snackBar = const SnackBar(
+    content: Text("日記を送信しました"),
+    behavior: SnackBarBehavior.floating,
+  );
 
   // HTTPリクエストを送信する関数
   void sendDialy() async {
@@ -44,6 +47,7 @@ class _WriteScreenState extends State<WriteScreen> {
       } else {
         // リクエストが失敗した場合の処理
         print('送信に失敗しました: ${response.statusCode}');
+        ScaffoldMessenger.of(context).showSnackBar(_snackBar);
       }
     } catch (e) {
       // エラーが発生した場合の処理

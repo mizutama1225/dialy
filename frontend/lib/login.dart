@@ -1,3 +1,4 @@
+import 'package:dialy/background.dart';
 import 'package:dialy/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -36,12 +37,10 @@ class _LogInPageState extends State<LogInPage> {
       );
 
       if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
 
-
-      final responseData = jsonDecode(response.body);
-
-      // USERIDをグローバル変数に保存
-      USERID = responseData['id'];
+        // USERIDをグローバル変数に保存
+        USERID = responseData['id'];
         // ログイン成功時の処理
         Navigator.push(
           context,
@@ -63,37 +62,39 @@ class _LogInPageState extends State<LogInPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('ログイン'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('メールアドレス'),
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.mail),
-                hintText: 'xxx@xxx.com',
+      body: Background(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('メールアドレス'),
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.mail),
+                  hintText: 'xxx@xxx.com',
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            const Text('パスワード'),
-            TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.key),
+              const SizedBox(height: 16),
+              const Text('パスワード'),
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.key),
+                ),
+                obscureText: true, // パスワード入力を隠す
               ),
-              obscureText: true, // パスワード入力を隠す
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: login,
-              child: const Text(
-                "ログイン",
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: login,
+                child: const Text(
+                  "ログイン",
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

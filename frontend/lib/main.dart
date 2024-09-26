@@ -1,3 +1,4 @@
+import 'package:dialy/firstpage.dart';
 import 'package:flutter/material.dart';
 // import 'package:dialy/home_screen.dart';
 import 'package:dialy/login.dart';
@@ -32,7 +33,7 @@ class _MainAppState extends State<MainApp> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(child: LogInPage()),
+        body: Center(child: FirstPage()),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:dialy/background.dart';
 import 'package:flutter/material.dart';
 import 'signup2.dart';
 import 'package:dialy/home_screen.dart';
@@ -5,7 +6,6 @@ import 'package:dialy/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -39,10 +39,10 @@ class _SignUpPageState extends State<SignUpPage> {
       );
 
       if (response.statusCode == 201 || response.statusCode == 200) {
-            final responseData = jsonDecode(response.body);
+        final responseData = jsonDecode(response.body);
 
-      // USERIDをグローバル変数に保存
-      USERID = responseData['id'];
+        // USERIDをグローバル変数に保存
+        USERID = responseData['id'];
         // アカウント登録成功時の処理
         Navigator.push(
           context,
@@ -64,35 +64,37 @@ class _SignUpPageState extends State<SignUpPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('アカウント登録'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('メールアドレス'),
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.mail),
-                hintText: 'xxx@xxx.com',
+      body: Background(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('メールアドレス'),
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.mail),
+                  hintText: 'xxx@xxx.com',
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            const Text('パスワード'),
-            TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.key),
+              const SizedBox(height: 16),
+              const Text('パスワード'),
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.key),
+                ),
+                obscureText: true, // パスワード入力を隠す
               ),
-              obscureText: true,  // パスワード入力を隠す
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: signUp,  // ボタンが押された時にsignUp関数を呼び出す
-              child: const Text("アカウント登録"),
-            ),
-          ],
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: signUp, // ボタンが押された時にsignUp関数を呼び出す
+                child: const Text("アカウント登録"),
+              ),
+            ],
+          ),
         ),
       ),
     );

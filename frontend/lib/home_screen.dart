@@ -58,23 +58,47 @@ class _HomeScreen extends State<HomeScreen> {
   Widget build(context) {
     return MaterialApp(
       home: Scaffold(
-        body: _selectedIndex == 3
-            ? FutureBuilder<List<Dialy>>(
-                future: _futureDialies,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (snapshot.hasData) {
-                    // バックエンドから取得したデータをDialyListに渡す
-                    return DialyList(dialies: snapshot.data!);
-                  } else {
-                    return const Center(child: Text('No data found.'));
-                  }
-                },
-              )
-            : _widgetOptions.elementAt(_selectedIndex),
+        body: Background(
+          child: _selectedIndex == 3
+              ? FutureBuilder<List<Dialy>>(
+                  future: _futureDialies,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (snapshot.hasData) {
+                      // バックエンドから取得したデータをDialyListに渡す
+                      return DialyList(dialies: snapshot.data!);
+                    } else {
+                      return const Center(child: Text('No data found.'));
+                    }
+                  },
+                )
+              : _widgetOptions.elementAt(_selectedIndex),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: badges.Badge(
+          showBadge: newDialyArrived,
+          badgeContent: const Text(
+            '!',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          badgeStyle: const badges.BadgeStyle(
+            badgeColor: Color.fromRGBO(93, 224, 230, 1),
+          ),
+          child: FloatingActionButton(
+            onPressed: () => _onItemTapped(2),
+            backgroundColor: Colors.black,
+            child: const Icon(
+              Icons.email,
+              color: Colors.white,
+            ),
+          ),
+        ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           items: [

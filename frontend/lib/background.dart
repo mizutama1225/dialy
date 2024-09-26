@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Background extends StatelessWidget {
-  Background({super.key, required this.childWidget});
+  Background({super.key, required this.child});
 
-  Widget childWidget;
+  Widget child;
 
   @override
   Widget build(context) {
@@ -18,7 +18,7 @@ class Background extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
       ),
-      child: childWidget,
+      child: child,
     );
   }
 }
