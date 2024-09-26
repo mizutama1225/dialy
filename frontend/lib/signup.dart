@@ -79,18 +79,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
                   child: Text('ログイン画面に切り替える'))],
             ),
-            SizedBox(height: 50,),
-            const Text('ユーザ名'),
-            const TextField(
-                decoration:InputDecoration(
-                    border:OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.account_circle),
-                    fillColor: Colors.white70,
-                    filled: true,
-
-                )
-            ),
-
 
             const Text('メールアドレス'),
             TextField(
